@@ -7,7 +7,20 @@ const router = express.Router();
 
 router.use(verifyToken);
 // Protected Routes
-// Creating a new Post
+// Show all listings page
+router.get("/", async (req, res) => {
+  try {
+    const listings = await Listing.find({})
+      .populate("seller")
+      .sort({ createAt: "desc" });
+    res.json(listings);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error.message);
+  }
+});
+
+// Creating a new Listing
 router.post("/", async (req, res) => {
   try {
     const listing = await Listing.create({ ...req.body, seller: req.user._id });
