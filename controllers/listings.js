@@ -20,6 +20,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Show a Listing page
+router.get("/:id", async (req, res) => {
+  try {
+    const listing = await Listing.findById(req.params.id).populate("seller");
+    res.json(listing);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error.message);
+  }
+});
+
 // Creating a new Listing
 router.post("/", async (req, res) => {
   try {
