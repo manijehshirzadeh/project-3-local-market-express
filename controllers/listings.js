@@ -83,4 +83,26 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// Creating a new Bid for a specific Listing
+router.post("/:listingId/bids", async (req, res) => {
+  try {
+    const listing = await Listing.findById(req.params.listingId);
+    if (!listing) {
+      res.status(404).json("This listing dosen't exist.");
+    }
+    listing.bids.push({ ...req.body, bidder: req.user._id });
+    await listing.save();
+
+    await listing.populate({
+      path: "bids",
+      populate: "bidder",
+    });
+    const bid = listing.bids.pop();
+    res.status(201).json(bid);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error.message);
+  }
+});
+
 module.exports = router;
