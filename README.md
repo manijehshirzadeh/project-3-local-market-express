@@ -75,4 +75,4 @@ https://project-3-local-market-react.onrender.com
 
 ## Next Steps:
 - Adding Edit and Delete functinality for Bids
-- Adding Like a Comment or Listing functinality
+- Adding Like functionality for bid or Listing
