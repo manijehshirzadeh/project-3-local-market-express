@@ -23,7 +23,9 @@ router.get("/", async (req, res) => {
 // Show a Listing page
 router.get("/:id", async (req, res) => {
   try {
-    const listing = await Listing.findById(req.params.id).populate("seller");
+    const listing = await Listing.findById(req.params.id)
+      .populate("seller")
+      .populate({ path: "bids", populate: "bidder" });
     res.json(listing);
   } catch (error) {
     console.log(error);
