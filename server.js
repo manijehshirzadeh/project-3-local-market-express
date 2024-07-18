@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
 const express = require("express");
-const app = express();
+const server = express();
 const mongoose = require("mongoose");
 const testJWTController = require("./controllers/test-jwt");
 const usersController = require("./controllers/users");
@@ -14,15 +14,15 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on("connected", () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
-app.use(cors());
-app.use(express.json());
+server.use(cors());
+server.use(express.json());
 
 // Routes go here
-app.use("/test-jwt", testJWTController);
-app.use("/users", usersController);
-app.use("/profiles", profilesController);
-app.use("/listings", listingsController);
+server.use("/test-jwt", testJWTController);
+server.use("/users", usersController);
+server.use("/profiles", profilesController);
+server.use("/listings", listingsController);
 
-app.listen(3000, () => {
-  console.log("The express app is ready!");
+server.listen(3000, () => {
+  console.log("The express server is ready!");
 });
