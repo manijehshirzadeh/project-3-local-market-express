@@ -74,5 +74,6 @@ https://project-3-local-market-react.onrender.com
 - Parisa Naeim https://github.com/parisa-naeim
 
 ## Next Steps:
-- Adding Edit and Delete functinality for Bids
-- Adding Like functionality for bid or Listing
+- Adding review functionality for listings
+- Adding Like functionality for bids or listings
+
